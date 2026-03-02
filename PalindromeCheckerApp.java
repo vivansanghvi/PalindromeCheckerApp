@@ -1,37 +1,31 @@
-import java.util.ArrayDeque;
-import java.util.Deque;
-
 /**
- * Use Case 7: Deque Based Optimized Palindrome Checker
+ * Use Case 9: Recursive Palindrome Checker
  * Description:
- * This class validates a palindrome using a Deque (Double Ended Queue). [cite: 67, 69]
- * Characters are inserted into the deque and then compared by removing
- * elements from both ends: removeFirst() and removeLast(). [cite: 70, 71, 72, 73]
- * This avoids reversing the string and provides an efficient
- * front-to-back comparison approach. [cite: 74, 75]
- * * @author Ambesh
- * @version 7.0
+ * This class validates a palindrome using recursion.
+ * Characters are compared from the outer positions moving inward using recursive calls.
+ * The recursion stops when all characters are matched or a mismatch is found.
+ * * @author Vivan
+ * @version 9.0
  */
 public class PalindromeCheckerApp
 {
     public static void main(String[] args)
     {
-        String input = "refer"; [cite: 86]
-        System.out.println("Input: " + input); [cite: 97]
-        Deque<Character> deque = new ArrayDeque<>(); [cite: 88]
-        for (char c : input.toCharArray()) { [cite: 90, 91]
-            deque.addLast(c);
+        String input = "madam";
+        System.out.println("Input: " + input);
+        boolean isPalindrome = check(input, 0, input.length() - 1);
+        System.out.println("Is Palindrome?: " + isPalindrome);
+    }
+    private static boolean check(String s, int start, int end)
+    {
+        if (start >= end)
+        {
+            return true;
         }
-        boolean isPalindrome = true; [cite: 93]
-        while (deque.size() > 1) { [cite: 95]
-
-            char first = deque.removeFirst(); [cite: 72]
-            char last = deque.removeLast(); [cite: 73]
-            if (first != last) {
-                isPalindrome = false;
-                break;
-            }
+        if (s.charAt(start) != s.charAt(end))
+        {
+            return false;
         }
-        System.out.println("Is Palindrome?: " + isPalindrome); [cite: 98]
+        return check(s, start + 1, end - 1);
     }
 }
